@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import MovieService from "../services/MovieService";
+import { Link } from 'react-router-dom';
 
 
 const MovieList = () => {
     const [movies, setMovies] = useState([]);
+    const [currentMovie, setCurrentMovie] = useState(null);
+    const [currentIndex, setCurrentIndex] = useState(-1);
     useEffect(() => {
         retrieveMovies();
     }, []);
@@ -27,6 +30,12 @@ const MovieList = () => {
        retrieveMovies();
    }
 
+   const setActiveMovie = (movie, index) => {
+
+       setCurrentMovie(movie);
+       setCurrentIndex(index);
+
+   }
 
     return (
         <div className="row">
@@ -49,7 +58,9 @@ const MovieList = () => {
       <th scope="row">{movie.id}</th>
       <td>{movie.title}</td>
       <td>{movie.year}</td>
-      <td></td>
+      <td>
+        <i className="bi bi-eye" onClick={() => setActiveMovie(movie, index)}></i>
+      </td>
       </tr>
         ))
     }
@@ -59,7 +70,33 @@ const MovieList = () => {
 </table>
            </div>
            <div className="col-6">
-
+                { (currentMovie) ? (
+                    <div>
+                        <h4>{currentMovie.title}</h4>
+                        <div>
+                            <label>
+                                <strong>Año: </strong>
+                                {currentMovie.year}
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                <strong>Sinopsis: </strong>
+                                {currentMovie.synopsis}
+                            </label>
+                        </div>
+                        <div>
+                            <img className="img-fluid" src={currentMovie.cover}/>
+                        </div>
+                        <Link to={'/movies/' + currentMovie.id} className="badge badge-warning">
+                            Editar
+                        </Link>
+                    </div> 
+                ): ( <div>
+                     <br />
+                     <div>Primero selecciona una pelícila..</div>
+                </div>   
+                )}
            </div>
         </div>
     )
