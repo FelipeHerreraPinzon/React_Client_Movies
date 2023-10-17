@@ -87,7 +87,7 @@ const AddMovie = () => {
                     <div className="form-group">
                         <label>Sinopsis</label>
                         <input 
-                           type="synopsis"
+                           type="text"
                            className="form-control"
                            id="synopsis"
                            required
@@ -100,7 +100,7 @@ const AddMovie = () => {
                     <div className="form-group">
                         <label>Año</label>
                         <input 
-                           type="year"
+                           type="text"
                            className="form-control"
                            id="year"
                            required

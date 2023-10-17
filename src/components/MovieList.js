@@ -60,6 +60,7 @@ const MovieList = () => {
       <td>{movie.year}</td>
       <td>
         <i className="bi bi-eye" onClick={() => setActiveMovie(movie, index)}></i>
+        <Link className="bi bi-pencil m-3" to={'/movies/' + movie.id}></Link>
       </td>
       </tr>
         ))
